@@ -1,6 +1,6 @@
 **/src-gen/*
 !**/src-gen/ignore.txt 
-!**/src-gen/CompleteExample.testsuite
+!**/src-gen/CompleteExample.java
 **/xtend-gen/*
 !**/xtend-gen/ignore.txt
 .metadata/
