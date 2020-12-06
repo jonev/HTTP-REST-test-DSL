@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="testSuite" nsURI="http://www.http.xtext/rest/TestSuite" nsPrefix="testSuite">
+  <eClassifiers xsi:type="ecore:EClass" name="TestCollection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resources" upperBound="-1"
+        eType="#//HttpResource" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headers" upperBound="-1"
+        eType="#//Header" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headersInEveryCall" unique="false"
+        upperBound="-1" eType="#//Header"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tests" upperBound="-1"
+        eType="#//Test" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvironmentVariable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HttpResource">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Header">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="headerName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ref" eType="#//EnvironmentVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reference" eType="#//JsonObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JsonObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fields" upperBound="-1"
+        eType="#//Value" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Test">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vars" upperBound="-1" eType="#//EnvironmentVariable"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testBodies" upperBound="-1"
+        eType="#//JsonObject" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headers" upperBound="-1"
+        eType="#//Header" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testElements" upperBound="-1"
+        eType="#//TestElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TestElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request" eType="#//HttpRequest"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assertions" upperBound="-1"
+        eType="#//Assertion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HttpRequest">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//JsonObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyInjectionValues" unique="false"
+        upperBound="-1" eType="#//EnvironmentVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceRef" eType="#//HttpResource"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resource" eType="#//HttpResource"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="resourceInjectionValues"
+        unique="false" upperBound="-1" eType="#//EnvironmentVariable"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headers" unique="false"
+        upperBound="-1" eType="#//Header"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="savedValues" unique="false"
+        upperBound="-1" eType="#//EnvironmentVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assertion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HttpGet" eSuperTypes="#//HttpRequest"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HttpPost" eSuperTypes="#//HttpRequest"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HttpPut" eSuperTypes="#//HttpRequest"/>
+  <eClassifiers xsi:type="ecore:EClass" name="HttpDelete" eSuperTypes="#//HttpRequest"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatusCodeAssertion" eSuperTypes="#//Assertion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BodyAssertion" eSuperTypes="#//Assertion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="body" eType="#//JsonObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bodyInjectionValues" unique="false"
+        upperBound="-1" eType="#//EnvironmentVariable"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextAssertion" eSuperTypes="#//Assertion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HeaderAssertion" eSuperTypes="#//Assertion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headers" upperBound="-1"
+        eType="#//Header" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="headerRefs" unique="false"
+        upperBound="-1" eType="#//Header"/>
+  </eClassifiers>
+</ecore:EPackage>

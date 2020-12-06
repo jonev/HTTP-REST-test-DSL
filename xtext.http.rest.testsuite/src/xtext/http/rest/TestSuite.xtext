@@ -1,0 +1,89 @@
+grammar xtext.http.rest.TestSuite with org.eclipse.xtext.common.Terminals
+
+generate testSuite "http://www.http.xtext/rest/TestSuite"
+
+
+TestCollection: 
+	'TestCollection:' name=ID
+	'description:' description=STRING
+	'Global Resources:' (resources += HttpResource)+
+	('Global Headers:' (headers += Header)*)?
+	('Headers included in every test:' 
+		headersInEveryCall += [Header] (', ' headersInEveryCall += [Header])*
+	)?
+	'Tests:' (tests += Test)+
+;
+
+EnvironmentVariable: 
+	'var' name=ID 'reference=' reference=STRING ('value=' value=STRING)?
+;
+
+HttpResource:
+	name=ID '@' url=STRING
+;
+
+Header:
+	name=ID 'name=' headerName=STRING 
+	('value=' value=STRING | 'reference=' ref=[EnvironmentVariable]) 
+;// find out how to use value= for both STRING and EnvironmentVariable -> Not possible because of not contained and contained reference
+
+Value:
+	name=ID ('=' value=STRING | '->' reference=[JsonObject])
+;
+
+JsonObject:
+	'Object' name=ID 'has' 'fields' fields += Value (', ' fields += Value)*
+;
+
+
+
+Test:
+	'Test name:' name=ID
+	('Environment:' 
+		((vars += EnvironmentVariable) | (testBodies += JsonObject) | ('Header' (headers += Header)))+
+	)?
+	(testElements+=TestElement)+
+;
+
+TestElement:
+	request=HttpRequest
+	(assertions += Assertion)+ // No point in writing a test if there isn't at least one assertion
+;
+
+HttpRequest:
+		(
+		({HttpGet} 'GET')
+		|
+		({HttpPost} 'POST')
+		|
+		({HttpPut} 'PUT')
+		|
+		({HttpDelete} 'DELETE')
+		)
+			('with body' body=[JsonObject]
+					('inject' bodyInjectionValues += [EnvironmentVariable]
+						(', ' bodyInjectionValues += [EnvironmentVariable])*
+					)?
+				)?
+			(('@' resourceRef=[HttpResource] | resource=HttpResource))
+			('inject' resourceInjectionValues += [EnvironmentVariable]
+					(', ' resourceInjectionValues += [EnvironmentVariable])*
+			)?
+			('with header(s)' (headers += [Header])? (', ' headers += [Header])* )?
+			('save' savedValues += [EnvironmentVariable] 'by ref')*
+;
+
+Assertion:
+	({StatusCodeAssertion} 'assert status code' code=INT)
+	|
+	({BodyAssertion} 'assert body' body=[JsonObject] 
+		('inject' bodyInjectionValues += [EnvironmentVariable]
+				(', ' bodyInjectionValues += [EnvironmentVariable])*
+		)?
+	)
+	|
+	({TextAssertion} 'assert text' text=STRING)
+	|
+	({HeaderAssertion} 'assert header(s)' (headers+=Header | headerRefs+=[Header]) (', '(headers+=Header | headerRefs+=[Header]))*
+	)
+;

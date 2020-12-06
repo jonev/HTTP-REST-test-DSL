@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: xtext.http.rest.testsuite
+Bundle-ManifestVersion: 2
+Bundle-Name: xtext.http.rest.testsuite
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: xtext.http.rest.testsuite; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: xtext.http.rest.generator,
+ xtext.http.rest.testSuite.util,
+ xtext.http.rest.parser.antlr.internal,
+ xtext.http.rest.serializer,
+ xtext.http.rest.services,
+ xtext.http.rest.testSuite,
+ xtext.http.rest.testSuite.impl,
+ xtext.http.rest.scoping,
+ xtext.http.rest,
+ xtext.http.rest.parser.antlr,
+ xtext.http.rest.validation
+Import-Package: org.apache.log4j
