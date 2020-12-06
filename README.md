@@ -1,4 +1,4 @@
-# Http REST test DSL
+# HTTP REST test DSL
 
 This is a project which explores the modelling and code generation functionality of `xText`, resulting in Eclipse DSL plugin which generates JUnit tests, as HTTP calls for testing REST API's.
 
