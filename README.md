@@ -2,6 +2,8 @@
 
 This is a project which explores the modelling and code generation functionality of [Xtext](https://www.eclipse.org/Xtext/), resulting in Eclipse DSL plugin which generates JUnit tests, as HTTP calls for testing REST API's.
 
+The DSL makes it possible to write [this](./xtext.http.rest.testsuite.example/src/CompleteExample.testsuite) and get [this](./xtext.http.rest.testsuite.example/src-gen/CompleteExample.java).
+
 ## Use the DSL
 
 ### Prerequisites:
