@@ -32,7 +32,7 @@ For the JUnit tests to succeed, there have to be a REST API which responds to th
 
 - xtext.http.rest.testsuite: Implementation of the DSL
   - Definition of the syntax [here](./xtext.http.rest.testsuite/src/xtext/http/rest/TestSuite.xtext)
-  - Code generator [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/TestSuiteGenerator.xtend) (helper classes: [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/RequestGenerator.xtend) and [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/AssertionGenerator.xtend)
+  - Code generator [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/TestSuiteGenerator.xtend) (helper classes: [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/RequestGenerator.xtend) and [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/AssertionGenerator.xtend))
   - Syntax validation [here](./xtext.http.rest.testsuite/src/xtext/http/rest/validation/TestSuiteValidator.java)
   - Generated data model [here](./xtext.http.rest.testsuite/model/generated/TestSuite.ecore)
 - xtext.http.rest.testsuite.example: Example usage of the DSL
