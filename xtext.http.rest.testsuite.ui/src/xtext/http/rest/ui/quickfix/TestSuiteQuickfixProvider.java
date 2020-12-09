@@ -27,21 +27,6 @@ import xtext.http.rest.validation.TestSuiteValidator;
  * See https://www.eclipse.org/Xtext/documentation/310_eclipse_support.html#quick-fixes
  */
 public class TestSuiteQuickfixProvider extends DefaultQuickfixProvider {
-
-/*	
-	@Fix(TestSuiteValidator.INVALID_URL)
-	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Invalid url", "Change the url to be valid", "upcase.png", new IModification() {
-			public void apply(IModificationContext context) throws BadLocationException {
-				IXtextDocument xtextDocument = context.getXtextDocument();
-				String url = xtextDocument.get(issue.getOffset(), issue.getLength());
-				url.replaceAll("", "_");
-				xtextDocument.replace(issue.getOffset(), issue.getLength(), "__");
-				
-			}
-		});
-	}*/
-	
 	
 	@Fix(TestSuiteValidator.NOT_UNIQUE)
 	public void renameName(final Issue issue, IssueResolutionAcceptor acceptor) {

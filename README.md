@@ -14,7 +14,7 @@ The DSL makes it possible to write [this](./xtext.http.rest.testsuite.example/sr
 
 1. Clone the repo
 2. Open Eclipse and select the folder as workspace and use `Import projects...` in the Package Explorer, then select `General/Existing Projects into Workspace` to import the modules.
-3. Run this file `./xtext.http.rest.testsuite/src/xtext/http/rest/TestSuite.xtext` with `Generate Xtext Artifacts` (Proceed with errors)
+3. Run this file `./xtext.http.rest.testsuite/src/xtext/http/rest/TestSuite.xtext` with `Generate Xtext Artifacts` (Proceed with errors), this will build the project an generate missing files.
 4. Select the root project `xtext.http.rest.testsuite` and use the run -> run as -> Eclipse application, this will open a new instance of Eclipse with the DSL plugin installed.
 5. Use the new instance and import `./xtext.http.rest.testsuite.example`
 6. Open `./src/CompleteExample.testsuite` this is an example of the features implemented in the DSL
@@ -32,7 +32,7 @@ For the JUnit tests to succeed, there have to be a REST API which responds to th
 
 - xtext.http.rest.testsuite: Implementation of the DSL
   - Definition of the syntax [here](./xtext.http.rest.testsuite/src/xtext/http/rest/TestSuite.xtext)
-  - Code generator [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/TestSuiteGenerator.xtend)
+  - Code generator [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/TestSuiteGenerator.xtend) (helper classes: [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/RequestGenerator.xtend) and [here](./xtext.http.rest.testsuite/src/xtext/http/rest/generator/AssertionGenerator.xtend)
   - Syntax validation [here](./xtext.http.rest.testsuite/src/xtext/http/rest/validation/TestSuiteValidator.java)
   - Generated data model [here](./xtext.http.rest.testsuite/model/generated/TestSuite.ecore)
 - xtext.http.rest.testsuite.example: Example usage of the DSL
@@ -51,9 +51,9 @@ For the JUnit tests to succeed, there have to be a REST API which responds to th
 - Global Headers: Define a header once, use it in multiple tests
 - Headers included in every test: Globally defined headers which will be present in every request
 - Define multiple tests, where each test consist of:
-  - Environment: Define variables, objects or headers related to the test
+  - Environment: Define variables, objects or headers to be used in the test
   - GET/POST/PUT/DELETE requests
-    - Add body to the request
+    - Add json body to the request
     - Inject variables into the resource url
     - Save values from the response body to a variable
   - Assertions of test response
